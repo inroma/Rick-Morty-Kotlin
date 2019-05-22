@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent" android:id="@+id/linearLayout">
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" tools:src="@tools:sample/avatars" android:id="@+id/characterImage"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/characterNameTextView" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAlignment="center" android:textStyle="bold" android:textSize="18sp"
+            android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/characterImage"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:id="@+id/characterGenderTextView"
+            android:textAlignment="viewStart"
+            app:layout_constraintTop_toBottomOf="@+id/characterNameTextView"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:id="@+id/characterStatusTextView"
+            android:textAlignment="viewStart"
+            app:layout_constraintTop_toBottomOf="@+id/characterNameTextView"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+    />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:id="@+id/characterSpeciesTextView"
+            android:textAlignment="viewStart"
+            app:layout_constraintTop_toBottomOf="@+id/characterGenderTextView"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:id="@+id/characterTypeTextView"
+            android:textAlignment="viewStart"
+            app:layout_constraintTop_toBottomOf="@+id/characterStatusTextView"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:id="@+id/characterOriginTextView"
+            android:textAlignment="viewStart"
+            app:layout_constraintTop_toBottomOf="@+id/characterSpeciesTextView"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:id="@+id/characterLocationTextView"
+            android:textAlignment="viewStart"
+            app:layout_constraintTop_toBottomOf="@+id/characterTypeTextView"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
