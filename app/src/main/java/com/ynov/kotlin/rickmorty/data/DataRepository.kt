@@ -2,6 +2,7 @@ package com.ynov.kotlin.rickmorty.data
 
 import android.util.Log
 import com.ynov.kotlin.rickmorty.data.Entity.CharacterRemoteEntity
+import com.ynov.kotlin.rickmorty.data.Episode.EpisodeRemoteEntity
 import io.reactivex.Single
 
 class DataRepository(private val apiManager: ApiManager) {
@@ -30,6 +31,31 @@ class DataRepository(private val apiManager: ApiManager) {
 
     fun retrieveCharacter(id: Int): Single<CharacterRemoteEntity> =
         apiManager.retrieveCharacter(id).map{
+            it
+        }
+
+    fun retrieveEpisodeList(): Single<List<EpisodeRemoteEntity>> {
+        return Single.defer<List<EpisodeRemoteEntity>>{
+            if(cacheManager.cacheEpisodeList.isEmpty()){
+                apiManager.retrieveEpisodeList().map {
+                    return@map it.results.map{ EpisodeRemoteEntity: EpisodeRemoteEntity ->
+                        EpisodeRemoteEntity(
+                            EpisodeRemoteEntity.air_date, EpisodeRemoteEntity.characters, EpisodeRemoteEntity.created,
+                            EpisodeRemoteEntity.episode, EpisodeRemoteEntity.id, EpisodeRemoteEntity.name,
+                            EpisodeRemoteEntity.url)
+                    }
+                }.doAfterSuccess{
+                    cacheManager.cacheEpisodeList = it
+                }
+            }
+            else {
+                Single.just(cacheManager.cacheEpisodeList)
+            }
+        }
+    }
+
+    fun retrieveEpisode(id: Int): Single<EpisodeRemoteEntity> =
+        apiManager.retrieveEpisode(id).map{
             it
         }
 }

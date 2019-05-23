@@ -2,6 +2,8 @@ package com.ynov.kotlin.rickmorty.data
 
 import com.ynov.kotlin.rickmorty.data.Entity.CharacterListResultRemoteEntity
 import com.ynov.kotlin.rickmorty.data.Entity.CharacterRemoteEntity
+import com.ynov.kotlin.rickmorty.data.Episode.EpisodeListResultRemoteEntity
+import com.ynov.kotlin.rickmorty.data.Episode.EpisodeRemoteEntity
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -23,8 +25,11 @@ class ApiManager {
         @GET("api/character/{id}")
         fun retrieveCharacter(@Path("id", encoded=true) id :Int): Single<CharacterRemoteEntity>
 
-        //@GET("api/episode")
-        //fun retrieveEpisodeList(): Single<EpisodeListResultRemoteEntity>
+        @GET("api/episode")
+        fun retrieveEpisodeList(): Single<EpisodeListResultRemoteEntity>
+
+        @GET("api/episode/{id}")
+        fun retrieveEpisode(@Path("id", encoded=true) id :Int): Single<EpisodeRemoteEntity>
 
     }
 
@@ -39,5 +44,6 @@ class ApiManager {
 
     fun retrieveCharacterList() = service.retrieveCharacterList()
     fun retrieveCharacter(id: Int) = service.retrieveCharacter(id)
-    //fun retrieveEpisodeList() = service.retrieveEpisodeList()
+    fun retrieveEpisodeList() = service.retrieveEpisodeList()
+    fun retrieveEpisode(id: Int) = service.retrieveEpisode(id)
 }

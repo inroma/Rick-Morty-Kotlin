@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="0dp">
+    <item
+            android:id="@+id/navigation_characters"
+            android:icon="@drawable/outline_perm_identity_white_18dp"
+            android:title="Characters"/>
+
+    <item
+            android:id="@+id/navigation_episodes"
+            android:icon="@drawable/outline_movie_creation_black_18dp"
+            android:title="Episodes"/>
+</menu>

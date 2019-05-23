@@ -2,18 +2,17 @@ package com.ynov.kotlin.rickmorty.presentation
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.os.Handler
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.ynov.kotlin.rickmorty.R
-import com.ynov.kotlin.rickmorty.data.ApiManager
+import com.ynov.kotlin.rickmorty.presentation.fragment.ListEpisodeFragment
 import com.ynov.kotlin.rickmorty.presentation.fragment.ListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mHandler: Handler
-    private lateinit var mRunnable:Runnable
+    lateinit var toolbar: ActionBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +21,24 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_activity_fragment_container, ListFragment()).commit()
 
+        navigationView.setOnNavigationItemSelectedListener{
+            when (it.itemId) {
+            R.id.navigation_characters -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_activity_fragment_container, ListFragment()).commit()
+                navigationView.itemTextColor
+            }
+            R.id.navigation_episodes -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_activity_fragment_container, ListEpisodeFragment()).commit()
+            }
+            else->{
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_activity_fragment_container, ListFragment()).commit()
+                }
+        }
+            false
+        }
     }
 
     override fun onBackPressed() {

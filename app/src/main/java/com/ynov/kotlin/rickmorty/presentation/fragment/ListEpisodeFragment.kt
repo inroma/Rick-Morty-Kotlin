@@ -10,18 +10,18 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.ynov.kotlin.rickmorty.R
-import com.ynov.kotlin.rickmorty.presentation.List.adapter.CharacterListAdapter
-import com.ynov.kotlin.rickmorty.presentation.viewModel.CharacterListViewModel
-import kotlinx.android.synthetic.main.fragment_list.*
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import kotlinx.android.synthetic.main.fragment_list.my_swipeRefresh_Layout
+import com.ynov.kotlin.rickmorty.presentation.List.adapter.EpisodeListAdapter
+import com.ynov.kotlin.rickmorty.presentation.viewModel.EpisodeListViewModel
+import kotlinx.android.synthetic.main.fragment_list.*
 
-class ListFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener {
+
+class ListEpisodeFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onRefresh() {
 
     }
 
-    lateinit var viewModel: CharacterListViewModel
+    lateinit var episodeViewModel: EpisodeListViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_list, container, false)
@@ -29,13 +29,13 @@ class ListFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val characterListAdapter = CharacterListAdapter()
-        fragment_list_recyclerview.adapter = characterListAdapter
+        val episodeListAdapter = EpisodeListAdapter()
+        fragment_list_recyclerview.adapter = episodeListAdapter
         fragment_list_recyclerview.layoutManager = LinearLayoutManager(context)
 
-        viewModel = ViewModelProviders.of(this).get(CharacterListViewModel::class.java)
+        episodeViewModel = ViewModelProviders.of(this).get(EpisodeListViewModel::class.java)
 
-        viewModel.characterListLiveData.observe(this, Observer { characterListAdapter.updateList(it) })
+        episodeViewModel.episodeListLiveData.observe(this, Observer { episodeListAdapter.updateList(it) })
 
         fun onChanged(throwable: Throwable) {
             if(getView() != null)
@@ -43,8 +43,10 @@ class ListFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener {
         }
 
         my_swipeRefresh_Layout.setOnRefreshListener {
-            viewModel.RefreshList()
+            episodeViewModel.RefreshEpisodeList()
             my_swipeRefresh_Layout.isRefreshing = false
         }
     }
+
+
 }
