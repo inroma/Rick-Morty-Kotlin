@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Rick&amp;Morty</string>
+    <string name="character_s_image">character\'s image</string>
+    <string name="rick_sanchez">Rick Sanchez</string>
+    <string name="alien">Alien</string>
+
+    <string name="title_caractere">Caractere</string>
+    <string name="title_episodes">Episodes</string>
+</resources>

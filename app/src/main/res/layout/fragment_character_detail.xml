@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".presentation.fragment.CharacterDetailFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="195dp" tools:srcCompat="@tools:sample/avatars"
+                android:id="@+id/activity_detail_character_image"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" android:scaleType="centerCrop"
+                android:contentDescription="@string/character_s_image"/>
+        <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/activity_detail_character_image">
+
+            <TableRow android:layout_width="match_parent"
+                      android:layout_height="match_parent">
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:ems="10"
+                        android:id="@+id/editText"/>
+                <TextView
+                        android:text="@string/rick_sanchez"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_detail_name_text"
+                        android:layout_marginTop="2dp"
+                        android:textSize="22sp"
+                        android:textColor="@android:color/black" android:textStyle="bold"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"/>
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Type"
+                        android:ems="10"
+                        android:id="@+id/editText2"/>
+                <TextView
+                        android:text="@string/alien"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_detail_gender_text"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp" android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
+                        android:textSize="22sp"/>
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Status"
+                        android:ems="10"
+                        android:id="@+id/editText3"/>
+                <TextView
+                        android:text="@string/rick_sanchez"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_detail_status_text"
+                        android:layout_marginTop="2dp"
+                        android:textSize="22sp"
+                        android:textColor="@android:color/secondary_text_light_nodisable"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"/>
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Species"
+                        android:ems="10"
+                        android:id="@+id/editText4"/>
+                <TextView
+                        android:text="@string/rick_sanchez"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_detail_species_text"
+                        android:layout_marginTop="2dp"
+                        android:textSize="22sp"
+                        android:textColor="@android:color/secondary_text_light_nodisable"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"/>
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Type"
+                        android:ems="10"
+                        android:id="@+id/editText5"/>
+                <TextView
+                        android:text="@string/rick_sanchez"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_detail_type_text"
+                        android:layout_marginTop="2dp"
+                        android:textSize="22sp"
+                        android:textColor="@android:color/secondary_text_light_nodisable"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"/>
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Origin"
+                        android:ems="10"
+                        android:id="@+id/editText6"/>
+                <TextView
+                        android:text="@string/rick_sanchez"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_detail_origin_text"
+                        android:layout_marginTop="2dp"
+                        android:textSize="22sp"
+                        android:textColor="@android:color/secondary_text_light_nodisable"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"/>
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                <TextView
+                        android:layout_width="86dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:text="Location"
+                        android:ems="10"
+                        android:id="@+id/editText7"/>
+                <TextView
+                        android:text="@string/rick_sanchez"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/activity_detail_location_text"
+                        android:layout_marginTop="2dp"
+                        android:textSize="22sp"
+                        android:textColor="@android:color/secondary_text_light_nodisable"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"/>
+            </TableRow>
+        </TableLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
