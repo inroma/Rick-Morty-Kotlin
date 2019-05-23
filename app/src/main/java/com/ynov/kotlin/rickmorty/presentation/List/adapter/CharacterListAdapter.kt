@@ -1,7 +1,6 @@
 package com.ynov.kotlin.rickmorty.presentation.List.adapter
 
 import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,20 +12,26 @@ import com.ynov.kotlin.rickmorty.data.Entity.CharacterRemoteEntity
 import com.ynov.kotlin.rickmorty.presentation.CharacterActivity
 import kotlinx.android.synthetic.main.view_character_list_item_name.view.*
 
+
 class CharacterListAdapter: RecyclerView.Adapter<CharacterListAdapter.ViewHolder>() {
 
     var characterList: MutableList<CharacterRemoteEntity> = mutableListOf()
+    var page: Int = 1
 
     override fun getItemCount(): Int {
         return characterList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        this.page = 1
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_character_list_item_name, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(this.characterList[position])
+        if (position == this.characterList.size - 1){
+            this.page += 1
+        }
     }
 
     class ViewHolder(@NonNull itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -48,6 +53,11 @@ class CharacterListAdapter: RecyclerView.Adapter<CharacterListAdapter.ViewHolder
     fun updateList(characterList: List<CharacterRemoteEntity> ) {
         this.characterList.clear()
         this.characterList.addAll(characterList)
+        notifyDataSetChanged()
+    }
+
+    fun appendList(charList: List<CharacterRemoteEntity> ) {
+        this.characterList.addAll(charList)
         notifyDataSetChanged()
     }
 }

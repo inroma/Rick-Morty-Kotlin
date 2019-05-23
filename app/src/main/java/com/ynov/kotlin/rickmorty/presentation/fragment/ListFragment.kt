@@ -46,5 +46,9 @@ class ListFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener {
             viewModel.RefreshList()
             my_swipeRefresh_Layout.isRefreshing = false
         }
+
+        fun add_characters(number: Int) {
+            viewModel.characterListLiveData.observe(this, Observer { characterListAdapter.appendList(it) })
+        }
     }
 }

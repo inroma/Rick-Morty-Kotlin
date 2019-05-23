@@ -11,6 +11,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 private const val API_BASE_URL = "https://rickandmortyapi.com/"
 
@@ -24,6 +25,9 @@ class ApiManager {
 
         @GET("api/character/{id}")
         fun retrieveCharacter(@Path("id", encoded=true) id :Int): Single<CharacterRemoteEntity>
+
+        @GET("api/character")
+        fun retrieveCharacterPage(@Query("page", encoded=true) id :Int): Single<CharacterRemoteEntity>
 
         @GET("api/episode")
         fun retrieveEpisodeList(): Single<EpisodeListResultRemoteEntity>
@@ -44,6 +48,7 @@ class ApiManager {
 
     fun retrieveCharacterList() = service.retrieveCharacterList()
     fun retrieveCharacter(id: Int) = service.retrieveCharacter(id)
+    fun retrieveCharacterPage(number: Int) = service.retrieveCharacterPage(number)
     fun retrieveEpisodeList() = service.retrieveEpisodeList()
     fun retrieveEpisode(id: Int) = service.retrieveEpisode(id)
 }

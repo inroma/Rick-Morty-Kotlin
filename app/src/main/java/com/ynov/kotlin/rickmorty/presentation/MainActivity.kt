@@ -21,23 +21,25 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_activity_fragment_container, ListFragment()).commit()
 
-        navigationView.setOnNavigationItemSelectedListener{
+        navigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-            R.id.navigation_characters -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_activity_fragment_container, ListFragment()).commit()
-                navigationView.itemTextColor
-            }
-            R.id.navigation_episodes -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_activity_fragment_container, ListEpisodeFragment()).commit()
-            }
-            else->{
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_activity_fragment_container, ListFragment()).commit()
+                R.id.navigation_characters -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_activity_fragment_container, ListFragment()).commit()
+                    navigationView.itemTextColor
+                    return@setOnNavigationItemSelectedListener true
                 }
-        }
-            false
+                R.id.navigation_episodes -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_activity_fragment_container, ListEpisodeFragment()).commit()
+                    return@setOnNavigationItemSelectedListener true
+                }
+                else -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_activity_fragment_container, ListFragment()).commit()
+                    return@setOnNavigationItemSelectedListener true
+                }
+            }
         }
     }
 
