@@ -27,7 +27,7 @@ class ApiManager {
         fun retrieveCharacter(@Path("id", encoded=true) id :Int): Single<CharacterRemoteEntity>
 
         @GET("api/character")
-        fun retrieveCharacterPage(@Query("page", encoded=true) id :Int): Single<CharacterRemoteEntity>
+        fun retrieveCharacterPage(@Query("page", encoded=true) id :Int): Single<CharacterListResultRemoteEntity>
 
         @GET("api/episode")
         fun retrieveEpisodeList(): Single<EpisodeListResultRemoteEntity>

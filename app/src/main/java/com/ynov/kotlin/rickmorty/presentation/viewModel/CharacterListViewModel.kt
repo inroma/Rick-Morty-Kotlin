@@ -13,11 +13,11 @@ class CharacterListViewModel: ViewModel() {
     var characterListLiveData: MutableLiveData<List<CharacterRemoteEntity>> = MutableLiveData()
 
     init{
-        RefreshList()
+        RefreshList(1)
     }
 
-    fun RefreshList() {
-        RMApplication.app.dataRepo.retrieveCharacterList()
+    fun RefreshList(page: Int) {
+        RMApplication.app.dataRepo.retrieveCharacterPage(page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

@@ -32,7 +32,7 @@ class DataRepository(private val apiManager: ApiManager) {
     fun retrieveCharacterPage(number: Int): Single<List<CharacterRemoteEntity>> {
         return Single.defer<List<CharacterRemoteEntity>>{
             if(cacheManager.cacheList.isEmpty()){
-                apiManager.retrieveCharacterList().map {
+                apiManager.retrieveCharacterPage(number).map {
                     return@map it.results.map{ characterRemoteEntity: CharacterRemoteEntity ->
                         CharacterRemoteEntity(
                             characterRemoteEntity.created, characterRemoteEntity.episode, characterRemoteEntity.gender,
@@ -41,7 +41,7 @@ class DataRepository(private val apiManager: ApiManager) {
                             characterRemoteEntity.status, characterRemoteEntity.type, characterRemoteEntity.url)
                     }
                 }.doAfterSuccess{
-                    cacheManager.cacheList = it
+                    cacheManager.cacheList += it
                 }
             }
             else {

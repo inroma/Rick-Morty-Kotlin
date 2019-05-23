@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.ynov.kotlin.rickmorty.R
 import com.ynov.kotlin.rickmorty.presentation.List.adapter.CharacterListAdapter
@@ -22,6 +24,7 @@ class ListFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     lateinit var viewModel: CharacterListViewModel
+    var page: Int = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_list, container, false)
@@ -43,12 +46,31 @@ class ListFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener {
         }
 
         my_swipeRefresh_Layout.setOnRefreshListener {
-            viewModel.RefreshList()
+            viewModel.RefreshList(1)
             my_swipeRefresh_Layout.isRefreshing = false
         }
 
-        fun add_characters(number: Int) {
+        fun add_characters() {
             viewModel.characterListLiveData.observe(this, Observer { characterListAdapter.appendList(it) })
         }
+
+        fragment_list_recyclerview.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx:
+            Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!recyclerView.canScrollVertically(1)) {
+                    onScrolledToBottom()
+                }
+            }
+            fun onScrolledToBottom() {
+                val initialSize = characterListAdapter.characterList.size
+                viewModel.RefreshList(page)
+                add_characters()
+                page += 1
+                val updatedSize = characterListAdapter.characterList.size
+                characterListAdapter.notifyItemRangeInserted(initialSize,updatedSize)
+            }
+        })
     }
 }

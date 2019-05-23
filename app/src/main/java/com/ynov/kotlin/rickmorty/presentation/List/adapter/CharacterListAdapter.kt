@@ -16,22 +16,17 @@ import kotlinx.android.synthetic.main.view_character_list_item_name.view.*
 class CharacterListAdapter: RecyclerView.Adapter<CharacterListAdapter.ViewHolder>() {
 
     var characterList: MutableList<CharacterRemoteEntity> = mutableListOf()
-    var page: Int = 1
 
     override fun getItemCount(): Int {
         return characterList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        this.page = 1
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_character_list_item_name, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(this.characterList[position])
-        if (position == this.characterList.size - 1){
-            this.page += 1
-        }
     }
 
     class ViewHolder(@NonNull itemView: View): RecyclerView.ViewHolder(itemView) {
