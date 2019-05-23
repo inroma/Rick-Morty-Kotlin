@@ -3,6 +3,8 @@ package com.ynov.kotlin.rickmorty.data
 import com.ynov.kotlin.rickmorty.data.entity.local.RMCharacter
 import com.ynov.kotlin.rickmorty.data.entity.remote.RemoteCharacter
 import com.ynov.kotlin.rickmorty.data.entity.remote.RemoteCharactersListResult
+import com.ynov.kotlin.rickmorty.data.entity.remote.RemoteEpisode
+import com.ynov.kotlin.rickmorty.data.entity.remote.RemoteEpisodeListResult
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,6 +23,9 @@ class ApiManager {
 
         @GET("api/character/{id}")
         fun retrieveCharacterDetails(@Path("id") id: String): io.reactivex.Single<RemoteCharacter>
+
+        @GET("api/episode")
+        fun retrieveEpisodeList(): io.reactivex.Single<RemoteEpisodeListResult>
     }
 
     init {
@@ -39,4 +44,9 @@ class ApiManager {
 
     fun retrieveCharacterDetails(id: String): io.reactivex.Single<RemoteCharacter> =
             service.retrieveCharacterDetails(id)
+
+    fun retrieveEpisodeList() : io.reactivex.Single<List<RemoteEpisode>> =
+            service.retrieveEpisodeList().map {
+                it.remoteEpisodeList
+            }
 }

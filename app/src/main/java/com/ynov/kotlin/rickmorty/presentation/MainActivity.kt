@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ynov.kotlin.rickmorty.R
 import com.ynov.kotlin.rickmorty.presentation.fragment.CharactersFragment
+import com.ynov.kotlin.rickmorty.presentation.fragment.EpisodeListFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,10 +17,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_episodes -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.mainactivity_fragment_container, CharactersFragment())
-                    .commit()
+                fragmentEpisodeList()
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -46,6 +44,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fragmentEpisodeList() {
-
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.mainactivity_fragment_container, EpisodeListFragment())
+            .commit()
     }
 }

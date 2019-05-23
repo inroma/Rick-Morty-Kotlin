@@ -4,6 +4,9 @@
     <string name="rick_sanchez">Rick Sanchez</string>
     <string name="alien">Alien</string>
 
+    <string name="episode_name">Pilot</string>
+    <string name="episode_number">S01E01</string>
+
     <string name="title_caractere">Caractere</string>
     <string name="title_episodes">Episodes</string>
 </resources>
