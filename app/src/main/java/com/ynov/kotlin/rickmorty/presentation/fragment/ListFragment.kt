@@ -27,6 +27,7 @@ class ListFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener {
     var page: Int = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        activity?.title = "Characters"
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
@@ -46,7 +47,7 @@ class ListFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener {
         }
 
         my_swipeRefresh_Layout.setOnRefreshListener {
-            viewModel.RefreshList(1)
+            viewModel.RefreshList()
             my_swipeRefresh_Layout.isRefreshing = false
         }
 
@@ -62,14 +63,28 @@ class ListFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 if (!recyclerView.canScrollVertically(1)) {
                     onScrolledToBottom()
                 }
+                else if(!recyclerView.canScrollVertically(-1)) {
+                    onScrolledToTop()
+                }
+            }
+            fun onScrolledToTop() {
+                if(page > 1) {
+                    page -= 1
+                    val initialSize = characterListAdapter.characterList.size
+                    viewModel.RefreshListPage(page)
+                    add_characters()
+                    val updatedSize = characterListAdapter.characterList.size
+                    characterListAdapter.notifyItemRangeInserted(initialSize,updatedSize)
+                }
             }
             fun onScrolledToBottom() {
-                val initialSize = characterListAdapter.characterList.size
-                viewModel.RefreshList(page)
-                add_characters()
                 page += 1
+                val initialSize = characterListAdapter.characterList.size
+                viewModel.RefreshListPage(page)
+                add_characters()
                 val updatedSize = characterListAdapter.characterList.size
                 characterListAdapter.notifyItemRangeInserted(initialSize,updatedSize)
+                fragment_list_recyclerview.scrollToPosition(updatedSize)
             }
         })
     }

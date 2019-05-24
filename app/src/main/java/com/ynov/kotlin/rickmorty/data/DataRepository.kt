@@ -32,6 +32,19 @@ class DataRepository(private val apiManager: ApiManager) {
     fun retrieveCharacterPage(number: Int): Single<List<CharacterRemoteEntity>> {
         return Single.defer<List<CharacterRemoteEntity>>{
             if(cacheManager.cacheList.isEmpty()){
+                apiManager.retrieveCharacterList().map {
+                    return@map it.results.map{ characterRemoteEntity: CharacterRemoteEntity ->
+                        CharacterRemoteEntity(
+                            characterRemoteEntity.created, characterRemoteEntity.episode, characterRemoteEntity.gender,
+                            characterRemoteEntity.id, characterRemoteEntity.image, characterRemoteEntity.location,
+                            characterRemoteEntity.name, characterRemoteEntity.origin, characterRemoteEntity.species,
+                            characterRemoteEntity.status, characterRemoteEntity.type, characterRemoteEntity.url)
+                    }
+                }.doAfterSuccess{
+                    cacheManager.cacheList = it
+                }
+            }
+            else if(number != 1){
                 apiManager.retrieveCharacterPage(number).map {
                     return@map it.results.map{ characterRemoteEntity: CharacterRemoteEntity ->
                         CharacterRemoteEntity(
@@ -41,7 +54,7 @@ class DataRepository(private val apiManager: ApiManager) {
                             characterRemoteEntity.status, characterRemoteEntity.type, characterRemoteEntity.url)
                     }
                 }.doAfterSuccess{
-                    cacheManager.cacheList += it
+                    cacheManager.cacheList = it
                 }
             }
             else {
@@ -59,6 +72,38 @@ class DataRepository(private val apiManager: ApiManager) {
         return Single.defer<List<EpisodeRemoteEntity>>{
             if(cacheManager.cacheEpisodeList.isEmpty()){
                 apiManager.retrieveEpisodeList().map {
+                    return@map it.results.map{ EpisodeRemoteEntity: EpisodeRemoteEntity ->
+                        EpisodeRemoteEntity(
+                            EpisodeRemoteEntity.air_date, EpisodeRemoteEntity.characters, EpisodeRemoteEntity.created,
+                            EpisodeRemoteEntity.episode, EpisodeRemoteEntity.id, EpisodeRemoteEntity.name,
+                            EpisodeRemoteEntity.url)
+                    }
+                }.doAfterSuccess{
+                    cacheManager.cacheEpisodeList = it
+                }
+            }
+            else {
+                Single.just(cacheManager.cacheEpisodeList)
+            }
+        }
+    }
+
+    fun retrieveEpisodePage(number: Int): Single<List<EpisodeRemoteEntity>> {
+        return Single.defer<List<EpisodeRemoteEntity>>{
+            if(cacheManager.cacheList.isEmpty()){
+                apiManager.retrieveEpisodeList().map {
+                    return@map it.results.map{ EpisodeRemoteEntity: EpisodeRemoteEntity ->
+                        EpisodeRemoteEntity(
+                            EpisodeRemoteEntity.air_date, EpisodeRemoteEntity.characters, EpisodeRemoteEntity.created,
+                            EpisodeRemoteEntity.episode, EpisodeRemoteEntity.id, EpisodeRemoteEntity.name,
+                            EpisodeRemoteEntity.url)
+                    }
+                }.doAfterSuccess{
+                    cacheManager.cacheEpisodeList = it
+                }
+            }
+            else if(number != 1){
+                apiManager.retrieveEpisodePage(number).map {
                     return@map it.results.map{ EpisodeRemoteEntity: EpisodeRemoteEntity ->
                         EpisodeRemoteEntity(
                             EpisodeRemoteEntity.air_date, EpisodeRemoteEntity.characters, EpisodeRemoteEntity.created,

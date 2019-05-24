@@ -35,6 +35,8 @@ class ApiManager {
         @GET("api/episode/{id}")
         fun retrieveEpisode(@Path("id", encoded=true) id :Int): Single<EpisodeRemoteEntity>
 
+        @GET("api/episode")
+        fun retrieveEpisodePage(@Query("page", encoded=true) id :Int): Single<EpisodeListResultRemoteEntity>
     }
 
     init {
@@ -50,5 +52,6 @@ class ApiManager {
     fun retrieveCharacter(id: Int) = service.retrieveCharacter(id)
     fun retrieveCharacterPage(number: Int) = service.retrieveCharacterPage(number)
     fun retrieveEpisodeList() = service.retrieveEpisodeList()
+    fun retrieveEpisodePage(number: Int) = service.retrieveEpisodePage(number)
     fun retrieveEpisode(id: Int) = service.retrieveEpisode(id)
 }

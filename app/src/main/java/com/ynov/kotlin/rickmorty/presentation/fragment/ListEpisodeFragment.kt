@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.ynov.kotlin.rickmorty.R
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -22,8 +23,10 @@ class ListEpisodeFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     lateinit var episodeViewModel: EpisodeListViewModel
+    var page: Int = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        activity?.title = "Episodes"
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
@@ -46,6 +49,43 @@ class ListEpisodeFragment: Fragment(), SwipeRefreshLayout.OnRefreshListener {
             episodeViewModel.RefreshEpisodeList()
             my_swipeRefresh_Layout.isRefreshing = false
         }
+
+        fun add_characters() {
+            episodeViewModel.episodeListLiveData.observe(this, Observer { episodeListAdapter.appendList(it) })
+        }
+
+        fragment_list_recyclerview.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx:
+            Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!recyclerView.canScrollVertically(1)) {
+                    onScrolledToBottom()
+                }
+                else if(!recyclerView.canScrollVertically(-1)) {
+                    onScrolledToTop()
+                }
+            }
+            fun onScrolledToTop() {
+                if(page > 1) {
+                    page -= 1
+                    val initialSize = episodeListAdapter.episodeList.size
+                    episodeViewModel.RefreshEpisodePage(page)
+                    add_characters()
+                    val updatedSize = episodeListAdapter.episodeList.size
+                    episodeListAdapter.notifyItemRangeInserted(initialSize,updatedSize)
+                }
+            }
+            fun onScrolledToBottom() {
+                val initialSize = episodeListAdapter.episodeList.size
+                page += 1
+                episodeViewModel.RefreshEpisodePage(page)
+                add_characters()
+                val updatedSize = episodeListAdapter.episodeList.size
+                episodeListAdapter.notifyItemRangeInserted(initialSize,updatedSize)
+                fragment_list_recyclerview.scrollToPosition(updatedSize)
+            }
+        })
     }
 
 

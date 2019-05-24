@@ -29,4 +29,18 @@ class EpisodeListViewModel: ViewModel() {
                     Log.e("ERROR", "", it)
                 })
     }
+
+    fun RefreshEpisodePage(page: Int) {
+        RMApplication.app.dataRepo
+            .retrieveEpisodePage(page)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    episodeListLiveData.postValue(it)
+                },
+                onError = {
+                    Log.e("ERROR", "", it)
+                })
+    }
 }

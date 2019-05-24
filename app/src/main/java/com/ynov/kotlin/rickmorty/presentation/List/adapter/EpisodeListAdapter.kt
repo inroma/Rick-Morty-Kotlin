@@ -38,4 +38,11 @@ class EpisodeListAdapter: RecyclerView.Adapter<EpisodeListAdapter.ViewHolder>() 
         this.episodeList.addAll(episodeList)
         notifyDataSetChanged()
     }
+
+    fun appendList(epList: List<EpisodeRemoteEntity> ) {
+        if(this.episodeList.contains(epList[1])) {
+            this.episodeList.addAll(epList)
+            notifyDataSetChanged()
+        }
+    }
 }

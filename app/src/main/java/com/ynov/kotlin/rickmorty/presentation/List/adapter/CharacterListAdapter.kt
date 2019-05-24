@@ -52,7 +52,9 @@ class CharacterListAdapter: RecyclerView.Adapter<CharacterListAdapter.ViewHolder
     }
 
     fun appendList(charList: List<CharacterRemoteEntity> ) {
-        this.characterList.addAll(charList)
-        notifyDataSetChanged()
+        if(this.characterList.contains(charList[1])) {
+            this.characterList.addAll(charList)
+            notifyDataSetChanged()
+        }
     }
 }
