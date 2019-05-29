@@ -6,6 +6,8 @@ import com.ynov.kotlin.rickmorty.data.Episode.EpisodeRemoteEntity
 import io.reactivex.Single
 
 class DataRepository(private val apiManager: ApiManager) {
+
+    // TODO vous auriez pu l'injecter comme l'ApiManager aussi
     var cacheManager = CacheManager()
 
     fun retrieveCharacterList(): Single<List<CharacterRemoteEntity>> {
@@ -122,6 +124,7 @@ class DataRepository(private val apiManager: ApiManager) {
 
     fun retrieveEpisode(id: Int): Single<EpisodeRemoteEntity> =
         apiManager.retrieveEpisode(id).map{
+            // TODO pas besoin de faire un map si vous retournez directement it
             it
         }
 }

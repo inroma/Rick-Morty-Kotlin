@@ -16,6 +16,7 @@ class EpisodeListViewModel: ViewModel() {
         RefreshEpisodeList()
     }
 
+    // TODO attention les noms de fonction ne commencent pas par une majuscule
     fun RefreshEpisodeList() {
         RMApplication.app.dataRepo
             .retrieveEpisodeList()
